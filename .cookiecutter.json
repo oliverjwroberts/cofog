@@ -1,0 +1,14 @@
+{
+  "_output_dir": "C:\\Users\\ollir\\Documents\\local_projects\\cofog",
+  "_template": "gh:cjolowicz/cookiecutter-hypermodern-python",
+  "author": "Oliver Roberts",
+  "copyright_year": "2022",
+  "development_status": "Development Status :: 1 - Planning",
+  "email": "oliverjwroberts@gmail.com",
+  "friendly_name": "Cofog",
+  "github_user": "oliverjwroberts",
+  "license": "MIT",
+  "package_name": "cofog",
+  "project_name": "cofog",
+  "version": "0.0.0"
+}
