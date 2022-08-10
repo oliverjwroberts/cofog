@@ -32,8 +32,9 @@ class COFOG:
     def __post_init__(self):
         """Method to run after initialisation of the COFOG class."""
         self.code = parse(self.code)
-        if not self.is_valid(self.code):
+        if not self.is_valid():
             raise InvalidCOFOGCodeError(self.code)
+        self.description = self.description()
         self.level = get_level(self.code)
         self._all_levels = get_all_levels(self.code)
 
@@ -55,4 +56,7 @@ class COFOG:
             raise InvalidCOFOGLevelError(level)
         if self._all_levels[level] is None:
             raise ValueError("Level does not exist for given COFOG code.")
+        # Reset class attributes
         self.code = self._all_levels[level]
+        self.description = self.description()
+        self.level = get_level(self.code)

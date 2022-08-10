@@ -31,7 +31,7 @@ class TestCOFOG:
 
     def test_description(self) -> None:
         """Tests the description method."""
-        assert COFOG("04.4").description() == "Mining, manufacturing and construction"
+        assert COFOG("04.4").description == "Mining, manufacturing and construction"
 
     def test_set_level_raises_error(self) -> None:
         """Tests method raises error when to high/low level is specified."""
@@ -45,11 +45,23 @@ class TestCOFOG:
         with pytest.raises(ValueError):
             cofog.set_level(3)
 
-    def test_set_level(self) -> None:
-        """Tests the set_level method."""
+    def test_set_level_code(self) -> None:
+        """Tests the set_level method sets the correct code."""
         cofog = COFOG("4.3.6")
         cofog.set_level(2)
         assert cofog.code == "4.3"
+
+    def test_set_level_description(self) -> None:
+        """Tests the set_level method sets the correct description."""
+        cofog = COFOG("4.3.6")
+        cofog.set_level(2)
+        assert cofog.description == "Fuel and energy"
+
+    def test_set_level_level(self) -> None:
+        """Tests the set_level method sets the correct level."""
+        cofog = COFOG("4.3.6")
+        cofog.set_level(2)
+        assert cofog.level == 2
 
     def test_set_higher_level(self) -> None:
         """Tests method returns original code after being set to lower level."""
