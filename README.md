@@ -21,13 +21,27 @@
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [black]: https://github.com/psf/black
 
+## Introduction
+
+Classification of the Functions of Government (COFOG) is a classification defined by the United Nations Statistics Division. Its purpose is to "classify the purpose of transactions such as outlays on final consumption expenditure, intermediate consumption, gross capital formation and capital and current transfers, by general government" (from [home page]).
+
+This intention of this package is to serve a convenient way of parsing and interfacing with the classifications.
+
+## Data
+
+Data was sourced from the UN's [classifications on economic statistics page] and parsed into a dictionary that can be found in `src/cofog/data.py`.
+
 ## Features
 
-- TODO
+- Provides the `COFOG` class to represent a Classification of Functions of Government.
+- Validate `COFOG` codes through Regular Expressions and presence in the data.
+- Lookup descriptions from codes.
+- Traverse the levels of any given code, with the ability to set a lower level without forgetting the original level.
 
 ## Requirements
 
-- TODO
+- Python >=3.7
+- Click >=8.0.1
 
 ## Installation
 
@@ -39,7 +53,35 @@ $ pip install cofog
 
 ## Usage
 
-Please see the [Command-line Reference] for details.
+Please see the [usage page] in the docs for full details.
+
+Get started by initialising a new `COFOG` object with a code. These can be either specified as strings (with and without dots) or integers.
+
+```python
+from cofog import COFOG
+
+cofog = COFOG("04.3.6")
+
+# or any of the following
+COFOG("0436")
+COFOG("436")
+COFOG(436)
+```
+
+You can then access the code's description as well as traverse it's levels.
+
+```python
+print(cofog.description)
+# Non-electric energy  (CS)
+print(cofog.level)
+# 3
+
+cofog.set_level(2)
+print(cofog.code)
+# 04.3
+print(cofog.description)
+# Fuel and energy
+```
 
 ## Contributing
 
@@ -58,16 +100,22 @@ please [file an issue] along with a detailed description.
 
 ## Credits
 
+This project was heavily inspired by [@ellsphillips]'s [govsic] package.
+
 This project was generated from [@cjolowicz]'s [Hypermodern Python Cookiecutter] template.
 
-[@cjolowicz]: https://github.com/cjolowicz
+[home page]: https://unstats.un.org/unsd/classifications/Family/Detail/4
+[classifications on economic statistics page]: https://unstats.un.org/unsd/classifications/Econ
+[pip]: https://pip.pypa.io/
 [pypi]: https://pypi.org/
+[@ellsphillips]: https://github.com/ellsphillips
+[govsic]: https://github.com/ellsphillips/govsic
+[@cjolowicz]: https://github.com/cjolowicz
 [hypermodern python cookiecutter]: https://github.com/cjolowicz/cookiecutter-hypermodern-python
 [file an issue]: https://github.com/oliverjwroberts/cofog/issues
-[pip]: https://pip.pypa.io/
 
 <!-- github-only -->
 
-[license]: https://github.com/oliverjwroberts/cofog/blob/main/LICENSE
+[usage page]: https://cofog.readthedocs.io/en/latest/usage.html
 [contributor guide]: https://github.com/oliverjwroberts/cofog/blob/main/CONTRIBUTING.md
-[command-line reference]: https://cofog.readthedocs.io/en/latest/usage.html
+[license]: https://github.com/oliverjwroberts/cofog/blob/main/LICENSE
