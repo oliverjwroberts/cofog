@@ -38,9 +38,8 @@ def parse(code: COFOG_CODE_TYPE) -> str:
     if str(code).startswith("0"):
         return "0" + ".".join(str(code)[1:])
     # Parse code starting with 1
-    if str(code).startswith("1"):
-        if str(code)[1] == "0":
-            return "1" + ".".join(str(code)[1:])
+    if str(code).startswith("10"):
+        return "1" + ".".join(str(code)[1:])
     # Parse code starting with other numbers
     return "0" + ".".join(str(code))
 
@@ -64,11 +63,11 @@ def get_all_levels(code: str) -> Dict[int, Optional[str]]:  # noqa: D103
         level_one_code = code
         level_two_code = None
         level_three_code = None
-    elif level == 2:
+    if level == 2:
         level_one_code = convert_to_lower_level(code, 1)
         level_two_code = code
         level_three_code = None
-    elif level == 3:
+    if level == 3:
         level_one_code = convert_to_lower_level(code, 1)
         level_two_code = convert_to_lower_level(code, 2)
         level_three_code = code
