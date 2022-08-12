@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cofog"
-version = "0.0.0"
+version = "1.0.0"
 description = "Cofog"
 authors = ["Oliver Roberts <oliverjwroberts@gmail.com>"]
 license = "MIT"
