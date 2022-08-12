@@ -2,13 +2,14 @@
 
 
 from dataclasses import dataclass
+from typing import Union
 
 
 @dataclass
 class InvalidCOFOGCodeError(Exception):
     """Raised when an invalid COFOG code is given."""
 
-    code: str
+    code: Union[str, int]
 
     def __str__(self) -> str:
         """Returns the string representation of the exception."""
@@ -22,7 +23,7 @@ class InvalidCOFOGCodeError(Exception):
 class InvalidCOFOGLevelError(Exception):
     """Raised when an invalid COFOG level is given."""
 
-    level: str
+    level: Union[str, int]
 
     def __str__(self) -> str:
         """Returns the string representation of the exception."""

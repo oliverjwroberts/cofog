@@ -2,6 +2,8 @@
 
 
 import re
+from typing import Dict
+from typing import Optional
 
 from cofog.exceptions import InvalidCOFOGCodeError
 from cofog.types import COFOG_CODE_TYPE
@@ -19,7 +21,7 @@ def parse(code: COFOG_CODE_TYPE) -> str:
         ):  # noqa: W605
             raise InvalidCOFOGCodeError(code)
         # Append 0 at beginning if needed.
-        if not code.startswith("0"):
+        if not code.startswith("0") and code[1] == ".":
             return "0" + code
         return code
 
@@ -29,7 +31,7 @@ def parse(code: COFOG_CODE_TYPE) -> str:
         raise InvalidCOFOGCodeError(code)
     # Check code is a valid format.
     if not bool(
-        re.search(r"^(0[1-9]{1}|[1-9]{1}|10{1})(\d{1}){0,2}$", code)
+        re.search(r"^(0[1-9]{1}|[1-9]{1}|10{1})(\d{1}){0,2}$", str(code))
     ):  # noqa: W605
         raise InvalidCOFOGCodeError(code)
     # Parse code starting with 0
@@ -55,7 +57,7 @@ def convert_to_lower_level(code: str, level: int) -> str:
     return ".".join(code.split(".")[:level])
 
 
-def get_all_levels(code: str) -> dict[int:str]:  # noqa: D103
+def get_all_levels(code: str) -> Dict[int, Optional[str]]:  # noqa: D103
     """Function to get all levels from the given COFOG code."""
     level = get_level(code)
     if level == 1:

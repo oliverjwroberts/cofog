@@ -11,6 +11,10 @@ from cofog.exceptions import InvalidCOFOGLevelError
 class TestCOFOG:
     """Class to test the COFOG class methods."""
 
+    def test_representation(self) -> None:
+        """Tests the representation method."""
+        assert repr(COFOG("04.4")) == "04.4: Mining, manufacturing and construction"
+
     def test_is_valid_str(self) -> None:
         """Tests the is_valid method with a string code."""
         assert COFOG("7.2.4").is_valid()
@@ -33,6 +37,10 @@ class TestCOFOG:
         """Tests the description method."""
         assert COFOG("04.4").description == "Mining, manufacturing and construction"
 
+
+class TestSetLevel:
+    """Class to test the set_level method."""
+
     def test_set_level_raises_error(self) -> None:
         """Tests method raises error when to high/low level is specified."""
         cofog = COFOG("4.3.6")
@@ -49,7 +57,7 @@ class TestCOFOG:
         """Tests the set_level method sets the correct code."""
         cofog = COFOG("4.3.6")
         cofog.set_level(2)
-        assert cofog.code == "4.3"
+        assert cofog.code == "04.3"
 
     def test_set_level_description(self) -> None:
         """Tests the set_level method sets the correct description."""
@@ -68,4 +76,4 @@ class TestCOFOG:
         cofog = COFOG("4.3.6")
         cofog.set_level(1)
         cofog.set_level(3)
-        assert cofog.code == "4.3.6"
+        assert cofog.code == "04.3.6"

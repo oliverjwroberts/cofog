@@ -29,12 +29,12 @@ class COFOG:
 
     code: COFOG_CODE_TYPE
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Method to run after initialisation of the COFOG class."""
         self.code = parse(self.code)
         if not self.is_valid():
             raise InvalidCOFOGCodeError(self.code)
-        self.description = self.description()
+        self.description = self.get_description()
         self.level = get_level(self.code)
         self._all_levels = get_all_levels(self.code)
 
@@ -46,9 +46,9 @@ class COFOG:
         """Determines whether the given COFOG is valid."""
         return self.code in COFOG_GLOSSARY
 
-    def description(self) -> str:
-        """Description of the given code."""
-        return COFOG_GLOSSARY[self.code]
+    def get_description(self) -> str:
+        """Gets description of the given code."""
+        return COFOG_GLOSSARY[str(self.code)]
 
     def set_level(self, level: int) -> None:
         """Sets the COFOG to the given level."""
@@ -57,6 +57,6 @@ class COFOG:
         if self._all_levels[level] is None:
             raise ValueError("Level does not exist for given COFOG code.")
         # Reset class attributes
-        self.code = self._all_levels[level]
-        self.description = self.description()
-        self.level = get_level(self.code)
+        self.code = self._all_levels[level]  # type: ignore[assignment]
+        self.description = self.get_description()
+        self.level = get_level(str(self.code))

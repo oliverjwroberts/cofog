@@ -10,13 +10,13 @@ from cofog.parser import get_level
 from cofog.parser import parse
 
 
-class TestParser:
-    """Class to test the parser module."""
+class TestParseFunction:
+    """Class to test the parse function."""
 
     def test_parse_non_str_int(self) -> None:
         """Tests the parse method with a non-string/int code."""
         with pytest.raises(TypeError):
-            parse([436])
+            parse([436])  # type: ignore[arg-type]
 
     def test_parse_invalid_str_with_dots(self) -> None:
         """Tests the parse method with an invalid string code with dots."""
@@ -37,9 +37,25 @@ class TestParser:
         with pytest.raises(InvalidCOFOGCodeError):
             parse(8274)
 
-    def test_parse_valid_code(self) -> None:
-        """Tests the parse method with a valid COFOG code."""
+    def test_parse_valid_zero_code(self) -> None:
+        """Tests the parse method with a valid COFOG code starting with 0."""
+        assert parse("0432") == "04.3.2"
+
+    def test_parse_valid_non_zero_code(self) -> None:
+        """Tests the method with a valid COFOG code not starting with 0."""
+        assert parse("432") == "04.3.2"
+
+    def test_parse_valid_ten_code(self) -> None:
+        """Tests the parse method with a COFOG code starting with 10."""
+        assert parse("10.1.2") == "10.1.2"
+
+    def test_parse_valid_ten_code_no_dots(self) -> None:
+        """Tests the method with a code starting with 10 and no dots."""
         assert parse("1012") == "10.1.2"
+
+
+class TestParserLevelFunctions:
+    """Class to test the parser level functions."""
 
     def test_get_level(self) -> None:
         """Tests the get_level method."""
@@ -72,7 +88,7 @@ class TestParser:
 
     def test_get_all_levels_given_level_3(self) -> None:
         """Tests the get_all_levels method given a level 3 COFOG code."""
-        assert get_all_levels("09.2") == {
+        assert get_all_levels("09.2.1") == {
             1: "09",
             2: "09.2",
             3: "09.2.1",
