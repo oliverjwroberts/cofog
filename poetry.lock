@@ -70,8 +70,8 @@ python-versions = ">=3.6.0"
 soupsieve = ">1.2"
 
 [package.extras]
-html5lib = ["html5lib"]
 lxml = ["lxml"]
+html5lib = ["html5lib"]
 
 [[package]]
 name = "black"
@@ -206,8 +206,8 @@ optional = false
 python-versions = ">=3.7"
 
 [package.extras]
-docs = ["furo (>=2021.8.17b43)", "sphinx (>=4.1)", "sphinx-autodoc-typehints (>=1.12)"]
-testing = ["covdefaults (>=1.2.0)", "coverage (>=4)", "pytest (>=4)", "pytest-cov", "pytest-timeout (>=1.4.2)"]
+testing = ["pytest-timeout (>=1.4.2)", "pytest-cov", "pytest (>=4)", "coverage (>=4)", "covdefaults (>=1.2.0)"]
+docs = ["sphinx-autodoc-typehints (>=1.12)", "sphinx (>=4.1)", "furo (>=2021.8.17b43)"]
 
 [[package]]
 name = "flake8"
@@ -250,7 +250,7 @@ attrs = ">=19.2.0"
 flake8 = ">=3.0.0"
 
 [package.extras]
-dev = ["coverage", "hypothesis", "hypothesmith (>=0.2)", "pre-commit"]
+dev = ["pre-commit", "hypothesmith (>=0.2)", "hypothesis", "coverage"]
 
 [[package]]
 name = "flake8-docstrings"
@@ -384,10 +384,10 @@ optional = false
 python-versions = ">=3.6.1,<4.0"
 
 [package.extras]
-pipfile_deprecated_finder = ["pipreqs", "requirementslib"]
-requirements_deprecated_finder = ["pipreqs", "pip-api"]
-colors = ["colorama (>=0.4.3,<0.5.0)"]
 plugins = ["setuptools"]
+colors = ["colorama (>=0.4.3,<0.5.0)"]
+requirements_deprecated_finder = ["pip-api", "pipreqs"]
+pipfile_deprecated_finder = ["requirementslib", "pipreqs"]
 
 [[package]]
 name = "jinja2"
@@ -506,24 +506,24 @@ python-versions = "*"
 
 [[package]]
 name = "myst-parser"
-version = "0.17.2"
+version = "0.18.0"
 description = "An extended commonmark compliant parser, with bridges to docutils & sphinx."
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 
 [package.dependencies]
-docutils = ">=0.15,<0.18"
+docutils = ">=0.15,<0.19"
 jinja2 = "*"
 markdown-it-py = ">=1.0.0,<3.0.0"
 mdit-py-plugins = ">=0.3.0,<0.4.0"
 pyyaml = "*"
-sphinx = ">=3.1,<5"
+sphinx = ">=4,<6"
 typing-extensions = "*"
 
 [package.extras]
-testing = ["pytest-param-files (>=0.3.4,<0.4.0)", "pytest-regressions", "pytest-cov", "pytest (>=6,<7)", "docutils (>=0.17.0,<0.18.0)", "coverage", "beautifulsoup4"]
-rtd = ["sphinxext-opengraph (>=0.6.3,<0.7.0)", "sphinxcontrib.mermaid (>=0.7.1,<0.8.0)", "sphinxext-rediraffe (>=0.2.7,<0.3.0)", "sphinxcontrib-bibtex (>=2.4,<3.0)", "sphinx-panels", "sphinx-book-theme", "ipython"]
+testing = ["sphinx-pytest", "pytest-param-files (>=0.3.4,<0.4.0)", "pytest-regressions", "pytest-cov", "pytest (>=6,<7)", "coverage", "beautifulsoup4"]
+rtd = ["sphinxext-opengraph (>=0.6.3,<0.7.0)", "sphinxcontrib.mermaid (>=0.7.1,<0.8.0)", "sphinxext-rediraffe (>=0.2.7,<0.3.0)", "sphinx-design", "sphinx-book-theme", "ipython"]
 linkify = ["linkify-it-py (>=1.0,<2.0)"]
 code_style = ["pre-commit (>=2.12,<3.0)"]
 
@@ -878,7 +878,7 @@ livereload = "*"
 sphinx = "*"
 
 [package.extras]
-test = ["pytest", "pytest-cov"]
+test = ["pytest-cov", "pytest"]
 
 [[package]]
 name = "sphinx-click"
@@ -1397,8 +1397,8 @@ mypy-extensions = [
     {file = "mypy_extensions-0.4.3.tar.gz", hash = "sha256:2d82818f5bb3e369420cb3c4060a7970edba416647068eb4c5343488a6c604a8"},
 ]
 myst-parser = [
-    {file = "myst-parser-0.17.2.tar.gz", hash = "sha256:4c076d649e066f9f5c7c661bae2658be1ca06e76b002bb97f02a09398707686c"},
-    {file = "myst_parser-0.17.2-py3-none-any.whl", hash = "sha256:1635ce3c18965a528d6de980f989ff64d6a1effb482e1f611b1bfb79e38f3d98"},
+    {file = "myst-parser-0.18.0.tar.gz", hash = "sha256:739a4d96773a8e55a2cacd3941ce46a446ee23dcd6b37e06f73f551ad7821d86"},
+    {file = "myst_parser-0.18.0-py3-none-any.whl", hash = "sha256:4965e51918837c13bf1c6f6fe2c6bddddf193148360fbdaefe743a4981358f6a"},
 ]
 nodeenv = [
     {file = "nodeenv-1.6.0-py2.py3-none-any.whl", hash = "sha256:621e6b7076565ddcacd2db0294c0381e01fd28945ab36bcf00f41c5daf63bef7"},
