@@ -3,8 +3,10 @@
 
 import re
 from typing import Dict
+from typing import List
 from typing import Optional
 
+from cofog.data import COFOG_GLOSSARY
 from cofog.exceptions import InvalidCOFOGCodeError
 from cofog.types import COFOG_CODE_TYPE
 
@@ -76,3 +78,31 @@ def get_all_levels(code: str) -> Dict[int, Optional[str]]:  # noqa: D103
         2: level_two_code,
         3: level_three_code,
     }
+
+
+def filter_codes(code_to_test: str, code_reg_ex: str, level: int) -> bool:
+    """Function to indicate if a code matches certain criteria.
+
+    Args:
+        code_to_test (str): Code to test the criteria on.
+        code_reg_ex (str): RE pattern string to search for in code_to_test.
+        level (int): Level of code being searched for.
+
+    Returns:
+        bool: Boolean indicator wether code_to_test passes the filter.
+    """
+    if bool(re.search(code_reg_ex, code_to_test)) and get_level(code_to_test) == level:
+        return True
+    return False
+
+
+def get_children_of(parent_code: str) -> List[str]:
+    """Get codes of the children of the current COFOG."""
+    level = get_level(parent_code)
+    child_level = level + 1
+    children_codes = {
+        code: desc
+        for code, desc in COFOG_GLOSSARY.items()
+        if filter_codes(code, parent_code, child_level)
+    }
+    return list(children_codes.keys())

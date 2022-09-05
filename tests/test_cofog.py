@@ -6,6 +6,8 @@ import pytest
 from cofog.cofog import COFOG
 from cofog.exceptions import InvalidCOFOGCodeError
 from cofog.exceptions import InvalidCOFOGLevelError
+from cofog.exceptions import NoChildrenError
+from cofog.exceptions import NoParentError
 
 
 class TestCOFOG:
@@ -77,3 +79,30 @@ class TestSetLevel:
         cofog.set_level(1)
         cofog.set_level(3)
         assert cofog.code == "04.3.6"
+
+
+class TestParentChild:
+    """Class to test the get parent and children functionality."""
+
+    def test_get_parent_code_error(self) -> None:
+        """Tests error raised when getting parents of level 1 code."""
+        cofog = COFOG("4")
+        with pytest.raises(NoParentError):
+            cofog.get_parent_code()
+
+    def test_get_parent_code(self) -> None:
+        """Tests get_parent_code method."""
+        cofog = COFOG("6.3")
+        assert cofog.get_parent_code() == "06"
+
+    def test_get_children_codes_error(self) -> None:
+        """Tests error raised when getting children of level 3 code."""
+        cofog = COFOG("07.3.2")
+        with pytest.raises(NoChildrenError):
+            cofog.get_children_codes()
+
+    def test_get_children_codes(self) -> None:
+        """Tests get_children_codes method."""
+        cofog = COFOG("7.3")
+        children_codes = ["07.3.1", "07.3.2", "07.3.3", "07.3.4"]
+        assert cofog.get_children_codes() == children_codes
