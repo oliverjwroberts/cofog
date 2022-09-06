@@ -9,7 +9,7 @@ homepage = "https://github.com/oliverjwroberts/cofog"
 repository = "https://github.com/oliverjwroberts/cofog"
 documentation = "https://cofog.readthedocs.io"
 classifiers = [
-    "Development Status :: 1 - Planning",
+    "Development Status :: 5 - Production/Stable",
 ]
 
 [tool.poetry.urls]
