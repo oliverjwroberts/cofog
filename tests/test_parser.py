@@ -5,7 +5,9 @@ import pytest
 
 from cofog.exceptions import InvalidCOFOGCodeError
 from cofog.parser import convert_to_lower_level
+from cofog.parser import filter_codes
 from cofog.parser import get_all_levels
+from cofog.parser import get_children_of
 from cofog.parser import get_level
 from cofog.parser import parse
 
@@ -93,3 +95,20 @@ class TestParserLevelFunctions:
             2: "09.2",
             3: "09.2.1",
         }
+
+
+class TestParseChildren:
+    """Class to test parent and children functionality."""
+
+    def test_filter_codes_true(self) -> None:
+        """Tests filter_codes method with a passing code."""
+        assert filter_codes("07.3.2", r"7.3", 3) is True
+
+    def test_filter_codes_false(self) -> None:
+        """Tests filter_codes method with a non-passing code."""
+        assert filter_codes("08.2", r"7.3", 3) is False
+
+    def test_get_children_of(self) -> None:
+        """Tests get_children_of method."""
+        children_codes = ["07.3.1", "07.3.2", "07.3.3", "07.3.4"]
+        assert get_children_of("07.3") == children_codes

@@ -40,7 +40,7 @@ Data was sourced from the UN's [classifications on economic statistics page] and
 
 ## Requirements
 
-- Python >=3.7
+- Python >=3.8
 - Click >=8.0.1
 
 ## Installation
@@ -68,7 +68,7 @@ COFOG("436")
 COFOG(436)
 ```
 
-You can then access the code's description as well as traverse it's levels.
+You can then access the code's description as well as set it to lower level codes.
 
 ```python
 print(cofog.description)
@@ -81,6 +81,16 @@ print(cofog.code)
 # 04.3
 print(cofog.description)
 # Fuel and energy
+```
+
+You can also get parent and children codes of any valid code.
+
+```python
+print(cofog.get_parent_code())
+# 04.3
+
+print(COFOG("07.3").get_children_codes())
+# ["07.3.1", "07.3.2", "07.3.3", "07.3.4"]
 ```
 
 ## Contributing

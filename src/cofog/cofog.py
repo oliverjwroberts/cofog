@@ -2,11 +2,16 @@
 
 
 from dataclasses import dataclass
+from typing import List
+from typing import Optional
 
 from cofog.data import COFOG_GLOSSARY
 from cofog.exceptions import InvalidCOFOGCodeError
 from cofog.exceptions import InvalidCOFOGLevelError
+from cofog.exceptions import NoChildrenError
+from cofog.exceptions import NoParentError
 from cofog.parser import get_all_levels
+from cofog.parser import get_children_of
 from cofog.parser import get_level
 from cofog.parser import parse
 from cofog.types import COFOG_CODE_TYPE
@@ -60,3 +65,15 @@ class COFOG:
         self.code = self._all_levels[level]  # type: ignore[assignment]
         self.description = self.get_description()
         self.level = get_level(str(self.code))
+
+    def get_parent_code(self) -> Optional[str]:
+        """Get code of the parent to the current COFOG."""
+        if self.level == 1:
+            raise NoParentError()
+        return self._all_levels[self.level - 1]
+
+    def get_children_codes(self) -> List[str]:
+        """Get codes of the children of the current COFOG."""
+        if self.level == 3:
+            raise NoChildrenError()
+        return get_children_of(str(self.code))
