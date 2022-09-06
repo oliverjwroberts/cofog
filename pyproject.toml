@@ -16,7 +16,7 @@ classifiers = [
 Changelog = "https://github.com/oliverjwroberts/cofog/releases"
 
 [tool.poetry.dependencies]
-python = ">=3.8"
+python = "^3.8"
 click = ">=8.0.1"
 
 [tool.poetry.dev-dependencies]
