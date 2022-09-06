@@ -40,7 +40,7 @@ Data was sourced from the UN's [classifications on economic statistics page] and
 
 ## Requirements
 
-- Python >=3.7
+- Python >=3.8
 - Click >=8.0.1
 
 ## Installation
